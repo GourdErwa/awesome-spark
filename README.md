@@ -8,4 +8,4 @@
 ## 文档
 |目录|内容|
 |---|---|
-|[spark-docs-structured-streaming](./docs/images/structured-streaming/)           |structured-streaming 编程相关文档|
+|[spark-docs-structured-streaming](./docs/structured-streaming/)           |structured-streaming 编程相关文档|
