@@ -50,10 +50,10 @@ StreamingQuery 接口实现关系如下：
 spark 提供了`org.apache.spark.sql.execution.streaming.MetadataLog`接口用于统一处理元数据日志信息。  
 checkpointLocation 文件内容均使用 `MetadataLog`进行维护。
 
-分析接口实现关系如下：
+**分析 MetadataLog 接口实现关系如下：**
 ![MetadataLog_uml](https://raw.githubusercontent.com/GourdErwa/spark-advanced/master/docs/images/structured-streaming/MetadataLog_uml.png)
 
-各类作用说明：
+*各类作用说明*：
 - NullMetadataLog 空日志，即不输出日志直接丢弃
 - HDFSMetadataLog 使用 HDFS 作为元数据日志输出
     - CommitLog     提交日志
@@ -63,7 +63,8 @@ checkpointLocation 文件内容均使用 `MetadataLog`进行维护。
         - FileStreamSinkLog    文件类型作为数据接收端时日志记录
         - EsSinkMetadataLog    Es作为数据接收端时日志记录
 &emsp;    
-分析 CompactibleFileStreamLog#compact 合并逻辑简单描述为：
+
+**分析 CompactibleFileStreamLog#compact 合并逻辑简单描述为：**
 ```
 假设有 0,1,2,3,4,5,6,7,8,9,10 个批次依次到达，合并大小为3
 当前合并结果为   `0,1,2.compact,3,4`
@@ -73,7 +74,8 @@ last.compact 文件大小会随着批次运行无限增大
 ...
 ```
 &emsp;    
-分析 CompactibleFileStreamLog 删除过期文件逻辑：
+
+**分析 CompactibleFileStreamLog 删除过期文件逻辑：**
 ```java
 // CompactibleFileStreamLog#add 方法被调用时，默认会判断是否支持删除操作
   override def add(batchId: Long, logs: Array[T]): Boolean = {
