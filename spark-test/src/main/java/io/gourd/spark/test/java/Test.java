@@ -1,4 +1,4 @@
-package io.gourd.spark.java;
+package io.gourd.spark.test.java;
 
 /**
  * @author Li.Wei by 2019/12/10

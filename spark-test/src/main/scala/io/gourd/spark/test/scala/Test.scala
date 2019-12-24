@@ -1,4 +1,4 @@
-package io.gourd.spark.scala
+package io.gourd.spark.test.scala
 
 import org.apache.spark.sql.execution.streaming.CompactibleFileStreamLog.isCompactionBatch
 

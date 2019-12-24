@@ -1,2 +1,5 @@
 rootProject.name = 'spark-advanced'
+include 'spark-core'
+include 'spark-sql'
+include 'spark-test'
 

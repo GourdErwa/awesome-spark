@@ -9,29 +9,56 @@ version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
 
-configurations {
-    flinkShadowJar.exclude group: 'org.slf4j'
-    flinkShadowJar.exclude group: 'log4j'
-}
-
 repositories {
     mavenCentral()
 }
 
-dependencies {
+allprojects {
+    repositories {
+        mavenCentral()
+    }
 
-    compile group: 'org.apache.spark', name: 'spark-core_2.12', version: '2.4.4'
-    compile group: 'org.apache.spark', name: 'spark-sql_2.12', version: '2.4.4'
-    compile group: 'org.apache.spark', name: 'spark-streaming_2.12', version: '2.4.4'
+    apply plugin: 'idea'
+    group 'io.groud'
+    version '0.1'
+}
 
-    compile group: 'org.apache.spark', name: 'spark-sql-kafka-0-10_2.12', version: '2.4.4'
-    compile group: 'org.elasticsearch', name: 'elasticsearch-spark-20_2.11', version: '7.4.2'
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'scala'
 
-    compile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.25'
-    compile group: 'log4j', name: 'log4j', version: '1.2.17'
-    compile group: 'com.typesafe.scala-logging', name: 'scala-logging_2.12', version: '3.9.2'
+    // sourceCompatibility = Java SE 13
+    // targetCompatibility = Java SE 13
 
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        jcenter()
+    }
+
+    tasks.withType(JavaCompile) {
+        options.encoding = 'UTF-8'
+    }
+
+    dependencies {
+//        compile group: 'org.apache.spark', name: 'spark-core_2.12', version: '2.4.4'
+//        compile group: 'org.apache.spark', name: 'spark-sql_2.12', version: '2.4.4'
+//        compile group: 'org.apache.spark', name: 'spark-streaming_2.12', version: '2.4.4'
+//
+//        compile group: 'org.apache.spark', name: 'spark-sql-kafka-0-10_2.12', version: '2.4.4'
+//        compile group: 'org.elasticsearch', name: 'elasticsearch-spark-20_2.11', version: '7.4.2'
+
+        compile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.25'
+        compile group: 'log4j', name: 'log4j', version: '1.2.17'
+        compile group: 'com.typesafe.scala-logging', name: 'scala-logging_2.12', version: '3.9.2'
+
+        testCompile group: 'junit', name: 'junit', version: '4.12'
+    }
+
+    test {
+        useJUnitPlatform()
+        // systemProperty 'java.util.logging.manager', 'org.apache.logging.log4j.jul.LogManager'
+    }
 }
 
 jar {
